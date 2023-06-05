@@ -17,6 +17,8 @@ public class Purchase {
 	private String name;
 	@Column(name = "image_url")
 	private String imageUrl;
+	private double price;
+	private String description;
 	
 	public Purchase() {
 		super();
@@ -46,6 +48,22 @@ public class Purchase {
 		this.imageUrl = imageUrl;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -65,7 +83,8 @@ public class Purchase {
 
 	@Override
 	public String toString() {
-		return "Purchase [id=" + id + ", name=" + name + ", imageUrl=" + imageUrl + "]";
+		return "Purchase [id=" + id + ", name=" + name + ", imageUrl=" + imageUrl + ", price=" + price
+				+ ", description=" + description + "]";
 	}
 	
 	

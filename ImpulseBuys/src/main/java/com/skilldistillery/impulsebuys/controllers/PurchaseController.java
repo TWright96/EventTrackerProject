@@ -39,15 +39,14 @@ public class PurchaseController {
 	}
 
 	@PostMapping("purchases")
-	//Request Body is 
-	//HttpServletResponse is
-	//HttpServletRequest is
+	// Request Body is the information that is being created/saved to the body of the request.
+	// HttpServletResponse is the response that the request gives
+	// HttpServletRequest is the URL
 	public Purchase create(@RequestBody Purchase newPurchase, HttpServletResponse res, HttpServletRequest req) {
-		//purchaseService is doing what?
+		//purchase is set to purchaseService.create, which creates a new object from the create method in PurchaseServiceImpl
 		Purchase purchase = purchaseService.create(newPurchase);
 		res.setStatus(200);
-		
-		//String buffer is adding/appending 
+		// String buffer is adding/appending to URL
 		StringBuffer url = req.getRequestURL();
 		url.append("/").append(newPurchase.getId());
 		res.setHeader("purchase", url.toString());
@@ -58,7 +57,6 @@ public class PurchaseController {
 	@PutMapping("purchases/{purchaseId}")
 	public Purchase updatePurchase(@PathVariable int purchaseId, @RequestBody Purchase purchase,
 			HttpServletResponse res) {
-
 		Purchase updatedPurchase = purchaseService.update(purchaseId, purchase);
 		return updatedPurchase;
 	}
@@ -67,7 +65,6 @@ public class PurchaseController {
 	public boolean deletePurchase(@PathVariable int purchaseId, HttpServletResponse res) {
 		boolean deleted = purchaseService.delete(purchaseId);
 		if (deleted) {
-
 			res.setStatus(200);
 		}
 		return deleted;

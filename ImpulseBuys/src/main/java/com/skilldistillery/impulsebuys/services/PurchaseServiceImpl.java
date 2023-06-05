@@ -16,10 +16,8 @@ public class PurchaseServiceImpl implements PurchaseService{
 	
 	
 	@Override
-	public List<Purchase> listPurchases() {
-		
-		return purchaseRepo.findAll();
-		
+	public List<Purchase> listPurchases() {		
+		return purchaseRepo.findAll();	
 	}
 
 	@Override
@@ -29,15 +27,12 @@ public class PurchaseServiceImpl implements PurchaseService{
 		if(purchaseOpt.isPresent()) {
 			purchase = purchaseOpt.get();
 		}
-		
-		return purchase;
-		
+		return purchase;	
 	}
 
 	@Override
 	public Purchase create(Purchase newPurchase) {
 	 Purchase purchase = purchaseRepo.saveAndFlush(newPurchase);
-	
 		return purchase;
 	}
 
@@ -47,28 +42,25 @@ public class PurchaseServiceImpl implements PurchaseService{
 		Purchase managed = managedOpt.get();
 		if(managed != null) {
 			managed.setName(purchase.getName());
-			managed.setImageUrl(purchase.getImageUrl());
-			
-		}
-		
-		
-		
+			managed.setImageUrl(purchase.getImageUrl());	
+			managed.setPrice(purchase.getPrice());
+			managed.setDescription(purchase.getDescription());
+		}		
 		return managed;
 	}
 
 	@Override
 	public boolean delete(int purchaseId) {
-		//Optional Purchase is equal to the purchase that I found my by using the purchaseId from the parameters.
-		//We use Optional because ???
+		//Optional Purchase is equal to the purchase that I found by using the purchaseId from the parameters.
+		//We use Optional because we cannot delete an object that is not there. So we're checking to see if the 
+		//purchase Id has a null value or not before we try to delete.
 		Optional <Purchase> purchaseOpt = purchaseRepo.findById(purchaseId);
-		if(purchaseOpt.isPresent()) {
+		if(purchaseOpt.isPresent()) { 
 			Purchase purchase = purchaseOpt.get();
-			purchaseRepo.delete(purchase);
-			
+			//Deleting purchase
+			purchaseRepo.delete(purchase);	
 		}
-			return false;
-	}
-	
-	
-
+			return false;	
+	    // Why do we return false?
+	}		
 }
