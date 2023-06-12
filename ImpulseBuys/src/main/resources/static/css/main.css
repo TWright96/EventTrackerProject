@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+body {
+	background-image: url("https://www.no-burn.org/wp-content/uploads/2021/03/Burning-Public-Money-GAIA-2011_2.png");
+	text-align: center;
+}
+
+
+h1{
+	color: red;
+}
+
+h4{
+	color: white;
+}
+
+#ImpulseBuysListDiv{
+	margin: auto;
+	width: 50%;
+
+	
+}
+
+#impulseBuyDetails{
+	width:50%;
+	color:yellow;
+}
+
+#updateImpulseBuys{
+	margin-right: 100px;
+	width:50%;
+}

@@ -46,14 +46,14 @@ public class PurchaseServiceImpl implements PurchaseService{
 			managed.setPrice(purchase.getPrice());
 			managed.setDescription(purchase.getDescription());
 		}		
-		return managed;
+		return purchaseRepo.saveAndFlush(managed);
 	}
 
 	@Override
 	public boolean delete(int purchaseId) {
 		//Optional Purchase is equal to the purchase that I found by using the purchaseId from the parameters.
 		//We use Optional because we cannot delete an object that is not there. So we're checking to see if the 
-		//purchase Id has a null value or not before we try to delete.
+		//Optional Purchase (purchaseOpt) found by purchaseId, has a null value or not before we delete the purchase.
 		Optional <Purchase> purchaseOpt = purchaseRepo.findById(purchaseId);
 		if(purchaseOpt.isPresent()) { 
 			Purchase purchase = purchaseOpt.get();
