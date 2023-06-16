@@ -16,18 +16,6 @@ CREATE SCHEMA IF NOT EXISTS `impulsebuysdb` DEFAULT CHARACTER SET utf8 ;
 USE `impulsebuysdb` ;
 
 -- -----------------------------------------------------
--- Table `receipt`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `receipt` ;
-
-CREATE TABLE IF NOT EXISTS `receipt` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `have_receipt` TINYINT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `purchase`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `purchase` ;
@@ -37,34 +25,8 @@ CREATE TABLE IF NOT EXISTS `purchase` (
   `name` VARCHAR(100) NULL,
   `image_url` VARCHAR(2000) NULL,
   `price` DECIMAL(7,2) NULL,
-  `receipt_id` INT NOT NULL,
   `description` VARCHAR(1000) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_purchase_receipt_idx` (`receipt_id` ASC),
-  CONSTRAINT `fk_purchase_receipt`
-    FOREIGN KEY (`receipt_id`)
-    REFERENCES `receipt` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `comment`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `comment` ;
-
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `purchase_id` INT NOT NULL,
-  `content` TEXT(2000) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_comment_purchase1_idx` (`purchase_id` ASC),
-  CONSTRAINT `fk_comment_purchase1`
-    FOREIGN KEY (`purchase_id`)
-    REFERENCES `purchase` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -79,21 +41,14 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `receipt`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `impulsebuysdb`;
-INSERT INTO `receipt` (`id`, `have_receipt`) VALUES (1, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `purchase`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `impulsebuysdb`;
-INSERT INTO `purchase` (`id`, `name`, `image_url`, `price`, `receipt_id`, `description`) VALUES (1, 'labeler', NULL, 12.73, 1, 'purple and blue label maker');
+INSERT INTO `purchase` (`id`, `name`, `image_url`, `price`, `description`) VALUES (1, 'labeler', 'https://m.media-amazon.com/images/I/71vb3WdOnyL._AC_SY879_.jpg', 12.73, 'purple and blue label maker that is of no use to me because I have nothing to label');
+INSERT INTO `purchase` (`id`, `name`, `image_url`, `price`, `description`) VALUES (2, 'reeses ', 'https://i5.walmartimages.com/asr/892fd592-8943-49fe-88da-6e6ec25ff2ab.3de47ea5094f7014c1eaf20ff731c091.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF', 1.32, 'delicious chocolate and peanut butter candy');
+INSERT INTO `purchase` (`id`, `name`, `image_url`, `price`, `description`) VALUES (3, 'dog bone', 'https://s7d2.scene7.com/is/image/PetSmart/5277967?$CLEARjpg$', 5.75, 'a treat for the best boy in the world');
+INSERT INTO `purchase` (`id`, `name`, `image_url`, `price`, `description`) VALUES (4, 'movie projector', 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6513/6513555_sd.jpg;maxHeight=640;maxWidth=550', 75.89, 'for watching movies outside');
 
 COMMIT;
 
