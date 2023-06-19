@@ -12,7 +12,7 @@
       <tr *ngFor="let purchase of purchaseList">
         <td>{{purchase.id}}</td>
         <td (click)="viewPurchase= purchase">{{purchase.name}}</td>
-        <td ><button (click) = "destroyPurchase(purchase.id)">  X </button></td>
+        <td ><button (click) = "destroyPurchase(purchase.id)" type="button" class="btn btn-primary">  X </button></td>
       </tr>
     </tbody>
   </table>
@@ -29,7 +29,7 @@
     Image Url: <input type="text" name="imageUrl" [(ngModel)]="newPurchase.imageUrl">
     Price: <input type="number" step= "0.01" name="price" [(ngModel)]="newPurchase.price">
 
-    <br><button (click)="createPurchase(newPurchase)">Add</button>
+    <br><button (click)="createPurchase(newPurchase)" type="button" class="btn btn-primary">Add</button>
   </form>
   </div>
 
@@ -42,7 +42,7 @@
     Description: {{viewPurchase.description}}<br>
     Price: {{viewPurchase.price}}<br>
 
-    <br><button (click)="updatePurchase(viewPurchase)">Edit</button>
+    <br><button (click)="updatePurchase(viewPurchase)" type="button" class="btn btn-primary">Edit</button>
    </div>
 
 
