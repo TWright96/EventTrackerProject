@@ -1,0 +1,66 @@
+<p> Impulse Buys, when you waste, we track! </p>
+<div id="purchaseListDiv">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let purchase of purchaseList">
+        <td>{{purchase.id}}</td>
+        <td (click)="viewPurchase= purchase">{{purchase.name}}</td>
+        <td ><button (click) = "destroyPurchase(purchase.id)">  X </button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div>
+  <form >
+  <h3>Add purchase</h3>
+    Name: <input type="text" name="name" [(ngModel)]="newPurchase.name">
+    Description:  <input type="text" name="description" [(ngModel)]="newPurchase.description"><br>
+    Image Url: <input type="text" name="imageUrl" [(ngModel)]="newPurchase.imageUrl">
+    Price: <input type="number" step= "0.01" name="price" [(ngModel)]="newPurchase.price">
+
+    <br><button (click)="createPurchase(newPurchase)">Add</button>
+  </form>
+  </div>
+
+
+
+  <div *ngIf="viewPurchase">
+   <h4>ID# {{viewPurchase.id}}</h4><br>
+  <img src = "{{viewPurchase.imageUrl}}" width="300" height="300"><br>
+    Name: {{viewPurchase.name}}<br>
+    Description: {{viewPurchase.description}}<br>
+    Price: {{viewPurchase.price}}<br>
+
+    <br><button (click)="updatePurchase(viewPurchase)">Edit</button>
+   </div>
+
+
+
+
+    <div *ngIf="editPurchase">
+      ID# {{editPurchase.id}}<br>
+       Name: <input type="text" name="name" [(ngModel)]="editPurchase.name" placeholder="viewPurchase.name">
+       Description:  <input type="text" name="description" [(ngModel)]="editPurchase.description"><br>
+       Image Url: <input type="text" name="imageUrl" [(ngModel)]="editPurchase.imageUrl">
+       Price: <input type="number" step= "0.01" name="price" [(ngModel)]="editPurchase.price">
+
+       <br><button (click)="updatePurchase(editPurchase)">Save</button>
+  </div>
+
+
+
+
+
+
+
